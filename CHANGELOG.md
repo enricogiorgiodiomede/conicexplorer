@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-04-18
+
 ### Added
 
 - Interactive **conic section** explorer: right circular cone (60°) cut by a plane, with eccentricity control and target-eccentricity ↔ plane-tilt solving.
@@ -14,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **3D** view (`@react-three/fiber`, `@react-three/drei`): double cone, translucent cutting plane, intersection polyline, orbit controls.
 - **2D** panel: section curve in cutting-plane coordinates \((u, v)\) with conic labeling; parabola mode shows a reference diagram.
 - Core **math** module: general plane frame, implicit quadratic intersection, conic classification, UV/world sampling, hyperbola two-branch ordering.
+- **MIT** `LICENSE` and this changelog; README links to both.
 
 ### Fixed
 
