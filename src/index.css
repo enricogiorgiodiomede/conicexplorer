@@ -1,0 +1,246 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  background: #070b14;
+  color: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 28px;
+}
+
+.header h1 {
+  margin: 0 0 6px;
+  font-size: 1.55rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 720px;
+  color: #94a3b8;
+  line-height: 1.45;
+  font-size: 0.95rem;
+}
+
+.controls {
+  margin: 18px 0 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.slider-label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: #7dd3fc;
+}
+
+input[type="range"] {
+  width: min(640px, 100%);
+  accent-color: #38bdf8;
+}
+
+.preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.preset-btn {
+  cursor: pointer;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  background: #1e293b;
+}
+
+.preset-btn:hover {
+  background: #334155;
+  border-color: #475569;
+}
+
+.preset-btn:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+.readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.conic-desc {
+  margin: 0 0 18px;
+  padding: 14px 16px 16px;
+  max-width: 720px;
+  border-radius: 10px;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+}
+
+.conic-desc-title {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 650;
+  color: #f1f5f9;
+}
+
+.conic-desc-lead {
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.conic-eq {
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #020617;
+  border: 1px solid #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  color: #7dd3fc;
+}
+
+.conic-desc-keys {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.conic-desc ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.conic-desc li {
+  margin-bottom: 4px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 320px);
+  gap: 14px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+  background: #0b1224;
+  min-height: 320px;
+}
+
+.panel-3d {
+  height: min(62vh, 560px);
+}
+
+.panel-3d canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-2d {
+  min-height: 280px;
+}
+
+.conic-plot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+}
+
+.parabola-plot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 12px 14px;
+  text-align: center;
+}
+
+.parabola-plot-title {
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: #f8fafc;
+  margin-bottom: 6px;
+}
+
+.parabola-plot-svg {
+  flex: 1;
+  width: 100%;
+  min-height: 200px;
+  max-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parabola-diagram {
+  max-width: 100%;
+  height: auto;
+}
+
+.parabola-plot-caption {
+  margin: 10px 0 0;
+  max-width: 280px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #94a3b8;
+}
