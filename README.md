@@ -2,6 +2,8 @@
 
 Interactive browser app that shows how a **right circular double cone** intersects a **tilted plane** as you change the target **eccentricity** of the section. A large **3D** view shows the cone, plane, and intersection curve; a smaller **2D** panel plots the conic in the plane’s coordinates and labels it (circle, ellipse, parabola, or hyperbola).
 
+**License:** [MIT](LICENSE). **Changelog:** [CHANGELOG.md](CHANGELOG.md).
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) (LTS recommended) with **npm**

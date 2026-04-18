@@ -29,10 +29,11 @@ function ConicCanvasPlot({ analysis }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
   const [tick, setTick] = useState(0);
 
-  const uv = useMemo(
+  const sampled = useMemo(
     () => sampleConicUV(analysis, analysis.kind === "hyperbola" ? 120 : 180),
     [analysis],
   );
+  const uv = sampled.uv;
 
   useLayoutEffect(() => {
     const canvas = ref.current;
@@ -97,9 +98,9 @@ function ConicCanvasPlot({ analysis }: Props) {
     };
 
     if (analysis.kind === "hyperbola") {
-      const firstLen = uv.length / 2;
-      const a = uv.slice(0, firstLen);
-      const b = uv.slice(firstLen);
+      const split = sampled.hyperbolaSplit ?? Math.floor(uv.length / 2);
+      const a = uv.slice(0, split);
+      const b = uv.slice(split);
       if (a.length) {
         ctx.moveTo(toX(a[0]![0]), toY(a[0]![1]));
         for (let i = 1; i < a.length; i++) {
@@ -128,7 +129,7 @@ function ConicCanvasPlot({ analysis }: Props) {
     ctx.fillStyle = "#94a3b8";
     ctx.font = "12px system-ui, sans-serif";
     ctx.fillText("Section in the cutting plane (u, v)", cssW / 2, cssH - 12);
-  }, [analysis, uv, tick]);
+  }, [analysis, sampled, uv, tick]);
 
   return (
     <canvas

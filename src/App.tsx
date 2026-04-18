@@ -5,6 +5,8 @@ import { ConicPlot2D } from "./components/ConicPlot2D";
 import {
   analyzeConic,
   conicTitle,
+  CONE_SLOPE,
+  PLANE_D,
   thetaForTargetEccentricity,
 } from "./math/conics";
 
@@ -12,14 +14,31 @@ const E_MIN = 0;
 /** Matches √(1 + c²) for the 60° cone (see `CONE_SLOPE` in `conics.ts`). */
 const E_MAX = 2;
 
+/** Plane position sliders: −1 (left / down) … 0 … +1 (right / up). */
+const PLANE_POS_MIN = -1;
+const PLANE_POS_MAX = 1;
+const PLANE_POS_STEP = 0.01;
+
 export default function App() {
   const [eccentricity, setEccentricity] = useState(0.45);
+  const [planeSx, setPlaneSx] = useState(0);
+  const [planeSy, setPlaneSy] = useState(0);
 
   const theta = useMemo(
-    () => thetaForTargetEccentricity(eccentricity),
-    [eccentricity],
+    () =>
+      thetaForTargetEccentricity(
+        eccentricity,
+        CONE_SLOPE,
+        PLANE_D,
+        planeSx,
+        planeSy,
+      ),
+    [eccentricity, planeSx, planeSy],
   );
-  const analysis = useMemo(() => analyzeConic(theta), [theta]);
+  const analysis = useMemo(
+    () => analyzeConic(theta, CONE_SLOPE, PLANE_D, planeSx, planeSy),
+    [theta, planeSx, planeSy],
+  );
 
   const displayE =
     Math.abs(eccentricity - 1) < 0.04 && analysis.kind === "parabola"
@@ -32,7 +51,8 @@ export default function App() {
         <div>
           <h1>Conic sections</h1>
           <p className="subtitle">
-            Drag eccentricity to tilt the plane against the cone. The 2D panel
+            Drag eccentricity to tilt the plane against the cone. Use the plane
+            position sliders to shift the cut left/right and up/down. The 2D panel
             shows the intersection curve in plane coordinates.
           </p>
         </div>
@@ -74,6 +94,38 @@ export default function App() {
             {analysis.eccentricity.toFixed(3)}
           </span>
         </div>
+      </section>
+
+      <section
+        className="controls plane-position-controls"
+        aria-label="Cutting plane position in world space"
+      >
+        <label htmlFor="plane-x-slider" className="slider-label">
+          Plane position X (left ↔ right){" "}
+          <span className="mono">{planeSx.toFixed(2)}</span>
+        </label>
+        <input
+          id="plane-x-slider"
+          type="range"
+          min={PLANE_POS_MIN}
+          max={PLANE_POS_MAX}
+          step={PLANE_POS_STEP}
+          value={planeSx}
+          onChange={(e) => setPlaneSx(Number(e.target.value))}
+        />
+        <label htmlFor="plane-y-slider" className="slider-label">
+          Plane position Y (down ↔ up){" "}
+          <span className="mono">{planeSy.toFixed(2)}</span>
+        </label>
+        <input
+          id="plane-y-slider"
+          type="range"
+          min={PLANE_POS_MIN}
+          max={PLANE_POS_MAX}
+          step={PLANE_POS_STEP}
+          value={planeSy}
+          onChange={(e) => setPlaneSy(Number(e.target.value))}
+        />
       </section>
 
       <ConicDescription analysis={analysis} />

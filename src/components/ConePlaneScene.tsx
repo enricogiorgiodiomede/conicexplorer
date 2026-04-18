@@ -29,18 +29,16 @@ function SceneContent({ analysis, coneHeight }: Props) {
   );
 
   const lineBranches = useMemo(() => {
-    const buf = sampleConicWorld(analysis, 160);
+    const { xyz, hyperbolaSplit } = sampleConicWorld(analysis, 160);
     const out: THREE.Vector3[] = [];
-    for (let i = 0; i < buf.length; i += 3) {
-      out.push(new THREE.Vector3(buf[i], buf[i + 1], buf[i + 2]));
+    for (let i = 0; i < xyz.length; i += 3) {
+      out.push(new THREE.Vector3(xyz[i], xyz[i + 1], xyz[i + 2]));
     }
     if (analysis.kind !== "hyperbola" || out.length < 4) {
       return [out];
     }
-    // Two equal-length branches in `sampleConicUV`; do not use mid+1 or the
-    // first Line includes the other's start point and draws a chord between arms.
-    const firstLen = out.length / 2;
-    return [out.slice(0, firstLen), out.slice(firstLen)];
+    const split = hyperbolaSplit ?? Math.floor(out.length / 2);
+    return [out.slice(0, split), out.slice(split)];
   }, [analysis]);
 
   return (
